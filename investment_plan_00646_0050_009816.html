@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投資規劃書 ｜ 00646 ・ 0050 ・ 009816</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe4;
+    --paper2:#ece4d3;
+    --card:#fffdf6;
+    --ink:#1c2b22;
+    --ink-soft:#4a5a4f;
+    --green:#2d5a40;
+    --green-deep:#1f3d2e;
+    --green-light:#5a8a6b;
+    --gold:#b0894c;
+    --gold-soft:#cdb487;
+    --line:rgba(28,43,34,.12);
+    --line-strong:rgba(28,43,34,.22);
+    --red:#a84432;
+    --shadow:0 1px 2px rgba(31,61,46,.06),0 8px 28px rgba(31,61,46,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Sans TC",sans-serif;
+    background:
+      radial-gradient(1200px 600px at 100% -10%,rgba(176,137,76,.10),transparent 60%),
+      radial-gradient(900px 500px at -10% 110%,rgba(45,90,64,.10),transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:.01em;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:48px 28px 80px}
+  .serif{font-family:"Noto Serif TC",serif}
+
+  /* ---------- Header ---------- */
+  header.hero{
+    position:relative;
+    border:1px solid var(--line-strong);
+    background:linear-gradient(160deg,var(--green-deep),var(--green) 70%);
+    color:#f3ead6;
+    border-radius:18px;
+    padding:46px 44px 40px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  header.hero::after{
+    content:"";position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 34px);
+    pointer-events:none;
+  }
+  .eyebrow{font-size:13px;letter-spacing:.32em;color:var(--gold-soft);font-weight:500}
+  header.hero h1{
+    font-family:"Noto Serif TC",serif;font-weight:900;
+    font-size:clamp(30px,5vw,46px);line-height:1.2;margin:14px 0 8px;color:#fdf8ee;
+  }
+  .codes{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .code-chip{
+    font-family:"Noto Serif TC",serif;font-weight:700;font-size:15px;
+    border:1px solid rgba(205,180,135,.5);border-radius:999px;
+    padding:6px 16px;color:#f3ead6;background:rgba(255,255,255,.05);
+  }
+  .hero-sub{margin-top:18px;max-width:640px;color:#dfd3bc;font-size:14.5px}
+
+  /* ---------- Section ---------- */
+  section{margin-top:42px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
+  .sec-num{font-family:"Noto Serif TC",serif;font-weight:700;color:var(--gold);font-size:15px;letter-spacing:.1em}
+  .sec-head h2{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;color:var(--green-deep)}
+  .sec-head .rule{flex:1;height:1px;background:var(--line);align-self:center}
+  .lead{color:var(--ink-soft);font-size:15px;max-width:760px}
+
+  /* ---------- ETF cards ---------- */
+  .etf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+  .etf{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 20px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .etf::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--bar)}
+  .etf .tag{font-size:11.5px;letter-spacing:.18em;color:var(--ink-soft);font-weight:500}
+  .etf .code{font-family:"Noto Serif TC",serif;font-weight:900;font-size:26px;color:var(--green-deep);margin:2px 0 2px}
+  .etf .name{font-size:13.5px;color:var(--ink-soft);font-weight:500;margin-bottom:12px}
+  .etf ul{list-style:none;font-size:13px;color:var(--ink-soft)}
+  .etf li{padding:5px 0;border-top:1px dashed var(--line);display:flex;justify-content:space-between;gap:8px}
+  .etf li:first-child{border-top:none}
+  .etf li b{color:var(--ink);font-weight:600;text-align:right}
+
+  /* ---------- Inputs ---------- */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 4px;box-shadow:var(--shadow);overflow:hidden}
+  .presets{display:flex;gap:8px;flex-wrap:wrap;padding:16px 20px 6px;align-items:center}
+  .presets span.lbl{font-size:13px;color:var(--ink-soft);margin-right:4px}
+  .preset{cursor:pointer;border:1px solid var(--line-strong);background:transparent;border-radius:999px;
+    padding:6px 15px;font-family:"Noto Sans TC";font-size:13px;color:var(--green-deep);transition:.18s}
+  .preset:hover{background:var(--paper2)}
+  .preset.active{background:var(--green-deep);color:#f3ead6;border-color:var(--green-deep)}
+  .mode{cursor:pointer;border:1px solid var(--line-strong);background:transparent;border-radius:999px;
+    padding:6px 16px;font-family:"Noto Sans TC";font-size:13px;color:var(--green-deep);transition:.18s}
+  .mode:hover{background:var(--paper2)}
+  .mode.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+  .tablewrap{overflow-x:auto;padding:6px 8px 4px}
+  table.inputs{width:100%;border-collapse:collapse;min-width:560px}
+  table.inputs th{font-size:12px;color:var(--ink-soft);font-weight:500;text-align:right;padding:10px 12px;border-bottom:1px solid var(--line);letter-spacing:.04em}
+  table.inputs th:first-child{text-align:left}
+  table.inputs td{padding:12px;border-bottom:1px solid var(--line);text-align:right}
+  table.inputs tr:last-child td{border-bottom:none}
+  .etf-cell{display:flex;align-items:center;gap:10px;text-align:left}
+  .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .etf-cell .c{font-family:"Noto Serif TC",serif;font-weight:700;color:var(--green-deep)}
+  .etf-cell .n{font-size:11.5px;color:var(--ink-soft)}
+  input[type=number]{
+    width:120px;font-family:"Noto Serif TC",serif;font-size:15px;text-align:right;
+    border:1px solid var(--line-strong);border-radius:8px;padding:8px 10px;background:#fff;color:var(--ink);
+    transition:.15s;
+  }
+  input[type=number].pct{width:74px}
+  input[type=number]:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(45,90,64,.12)}
+  .unit{font-size:11.5px;color:var(--ink-soft);margin-left:3px}
+  .yearsrow{display:flex;align-items:center;gap:14px;padding:16px 22px;background:var(--paper2);flex-wrap:wrap}
+  .yearsrow label{font-size:14px;color:var(--green-deep);font-weight:500}
+  .yearsrow input[type=range]{flex:1;min-width:160px;accent-color:var(--green)}
+  .yearsval{font-family:"Noto Serif TC",serif;font-weight:900;font-size:22px;color:var(--green-deep)}
+  .note{font-size:12.5px;color:var(--ink-soft);padding:4px 22px 14px}
+
+  /* ---------- Results ---------- */
+  .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:4px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px;box-shadow:var(--shadow)}
+  .stat .k{font-size:12.5px;color:var(--ink-soft);letter-spacing:.06em}
+  .stat .v{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(24px,3.4vw,32px);line-height:1.25;margin-top:6px}
+  .stat .sub{font-size:12px;color:var(--ink-soft);margin-top:4px}
+  .stat.cost .v{color:var(--ink)}
+  .stat.value .v{color:var(--green)}
+  .stat.gain{background:linear-gradient(150deg,var(--green-deep),var(--green));border-color:var(--green-deep)}
+  .stat.gain .k{color:var(--gold-soft)}
+  .stat.gain .v{color:#fdf8ee}
+  .stat.gain .sub{color:#dcd0b8}
+
+  /* chart */
+  .chartcard{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 18px 14px;box-shadow:var(--shadow)}
+  .chart-legend{display:flex;gap:18px;flex-wrap:wrap;padding:0 6px 10px;font-size:12.5px;color:var(--ink-soft)}
+  .lg{display:flex;align-items:center;gap:7px}
+  .lg .sw{width:16px;height:4px;border-radius:2px}
+  svg.chart{width:100%;height:auto;display:block}
+  .gridline{stroke:var(--line);stroke-width:1}
+  .axislbl{font-size:11px;fill:var(--ink-soft);font-family:"Noto Sans TC"}
+  .tt{font-size:11px;fill:var(--ink-soft)}
+
+  /* breakdown */
+  .bd{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  table.bd-tbl{width:100%;border-collapse:collapse}
+  table.bd-tbl th,table.bd-tbl td{padding:13px 18px;font-size:13.5px;text-align:right;border-bottom:1px solid var(--line)}
+  table.bd-tbl th{background:var(--paper2);color:var(--ink-soft);font-weight:500;font-size:12px;letter-spacing:.04em}
+  table.bd-tbl th:first-child,table.bd-tbl td:first-child{text-align:left}
+  table.bd-tbl tr:last-child td{border-bottom:none}
+  table.bd-tbl tr.total td{background:var(--green-deep);color:#f3ead6;font-family:"Noto Serif TC";font-weight:700}
+  table.bd-tbl .num{font-family:"Noto Serif TC",serif;font-weight:600}
+  .pos{color:var(--green);font-weight:600}
+
+  /* actions */
+  .actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  .btn{cursor:pointer;border:1px solid var(--green-deep);background:var(--green-deep);color:#f3ead6;
+    border-radius:10px;padding:11px 20px;font-family:"Noto Sans TC";font-size:14px;transition:.18s}
+  .btn:hover{background:var(--green)}
+  .btn.ghost{background:transparent;color:var(--green-deep)}
+  .btn.ghost:hover{background:var(--paper2)}
+  .saved{font-size:12.5px;color:var(--green);align-self:center;opacity:0;transition:.3s}
+  .saved.show{opacity:1}
+
+  /* memo */
+  .memo{margin-top:42px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow)}
+  .memo h3{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;color:var(--green-deep);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .memo .mtag{font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:600;margin-bottom:14px}
+  .memo ul{list-style:none}
+  .memo li{padding:10px 0;border-top:1px dashed var(--line);font-size:13.5px;color:var(--ink-soft);display:flex;gap:12px}
+  .memo li:first-of-type{border-top:none}
+  .memo li .mk{flex:none;font-family:"Noto Serif TC",serif;font-weight:700;color:var(--green);min-width:74px}
+  .memo li b{color:var(--ink);font-weight:600}
+  .memo .mfoot{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft)}
+
+  /* disclaimer */
+  .disc{margin-top:40px;border-left:3px solid var(--gold);background:rgba(176,137,76,.07);
+    border-radius:0 12px 12px 0;padding:18px 22px;font-size:13px;color:var(--ink-soft)}
+  .disc b{color:var(--green-deep)}
+  footer{margin-top:34px;text-align:center;font-size:12px;color:var(--ink-soft)}
+
+  @media(max-width:720px){
+    .etf-grid,.summary{grid-template-columns:1fr}
+    .wrap{padding:28px 16px 60px}
+    header.hero{padding:32px 24px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow">長 期 複 利 ・ 定 期 定 額 規 劃</div>
+    <h1>三檔 ETF 二十年<br>複利投資規劃書</h1>
+    <div class="codes">
+      <span class="code-chip">00646 ・ 美股 S&amp;P 500</span>
+      <span class="code-chip">0050 ・ 台灣 50</span>
+      <span class="code-chip">009816 ・ 台灣 TOP50（不配息）</span>
+    </div>
+    <p class="hero-sub">以「目前已投入金額」加上「未來每月定期定額」為基礎，試算到第 20 年的累積本金、預估市值與獲利。所有金額皆可即時修改，下方圖表與表格會跟著重算。</p>
+  </header>
+
+  <!-- 1. 配置邏輯 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>三檔的角色分工</h2><div class="rule"></div></div>
+    <p class="lead">這三檔放在一起，是想用「一檔美股 + 兩檔台股核心」把雞蛋分散在兩個市場。00646 押全世界最大的美國市場、0050 與 009816 押台灣市值前 50 大；其中 009816 用「不配息、股息自動滾入」的方式，把長期複利的效率拉到最高。三者都是大盤型工具，不是短線操作標的。</p>
+    <div class="etf-grid">
+      <div class="etf" style="--bar:#3a6ea5">
+        <div class="tag">海 外 ・ 成 長 引 擎</div>
+        <div class="code">00646</div>
+        <div class="name">元大標普500</div>
+        <ul>
+          <li>追蹤 <b>美股 S&amp;P 500</b></li>
+          <li>含 500 大美企 <b>分散度高</b></li>
+          <li>計價 <b>新台幣（含匯率）</b></li>
+          <li>角色 <b>跨市場分散</b></li>
+        </ul>
+      </div>
+      <div class="etf" style="--bar:#2d5a40">
+        <div class="tag">台 股 ・ 經 典 核 心</div>
+        <div class="code">0050</div>
+        <div class="name">元大台灣50</div>
+        <ul>
+          <li>追蹤 <b>台灣市值前 50</b></li>
+          <li>配息 <b>半年配</b></li>
+          <li>台積電權重 <b>約 64%</b></li>
+          <li>角色 <b>台股壓艙石</b></li>
+        </ul>
+      </div>
+      <div class="etf" style="--bar:#b0894c">
+        <div class="tag">台 股 ・ 複 利 滾 存</div>
+        <div class="code">009816</div>
+        <div class="name">凱基台灣TOP50</div>
+        <ul>
+          <li>追蹤 <b>特選台灣 TOP50</b></li>
+          <li>配息 <b>不配息・自動滾入</b></li>
+          <li>台積電權重 <b>約 43%</b></li>
+          <li>經理費 <b>0.07%（偏低）</b></li>
+        </ul>
+      </div>
+    </div>
+    <p class="note" style="padding-left:0;margin-top:10px">009816 於 2026/2/3 掛牌，多了「近 4 季須獲利」與「前五大合計上限 65%」的篩選，台積電佔比刻意比 0050 低、AI 供應鏈分布較廣。因為不配息，省下股利所得稅與二代健保補充保費，理論上長期複利效率較高 —— 但它上市才幾個月，績效仍待時間驗證，下方報酬率請保守設定。</p>
+  </section>
+
+  <!-- 2. 輸入 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>填入你的數字</h2><div class="rule"></div></div>
+    <p class="lead">下面是<strong>範例數字</strong>，請改成你的實際金額。先選「投入方式」：每月定額扣款，或每年領獎金時單筆投入。</p>
+    <div class="panel" style="margin-top:14px">
+      <div class="presets" style="border-bottom:1px solid var(--line);padding-bottom:14px">
+        <span class="lbl">投入方式：</span>
+        <button class="mode active" data-mode="monthly">每月定額</button>
+        <button class="mode" data-mode="annual">每年單筆</button>
+        <span class="lbl" style="margin-left:auto;font-size:12px">每年單筆＝領到獎金時一次投入（假設年初投入、整年複利）</span>
+      </div>
+      <div class="presets">
+        <span class="lbl">報酬率情境：</span>
+        <button class="preset" data-rate="6">保守 6%</button>
+        <button class="preset active" data-rate="8">中性 8%</button>
+        <button class="preset" data-rate="10">樂觀 10%</button>
+        <span class="lbl" style="margin-left:auto;font-size:12px">（按一下會把三檔年化報酬一起設定，仍可個別微調）</span>
+      </div>
+      <div class="tablewrap">
+        <table class="inputs">
+          <thead>
+            <tr>
+              <th>標的</th>
+              <th>目前已投入</th>
+              <th id="amtHead">每月投入</th>
+              <th>預估年化報酬</th>
+            </tr>
+          </thead>
+          <tbody id="inputBody"></tbody>
+        </table>
+      </div>
+      <div class="yearsrow">
+        <label>投資年期</label>
+        <input type="range" id="years" min="1" max="40" value="20">
+        <span class="yearsval"><span id="yearsVal">20</span> 年</span>
+      </div>
+      <p class="note">金額單位為新台幣（元）。報酬率為「年化複利」假設，並非保證。每月定額以每月底投入計算；每年單筆以每年年初投入計算（較能反映「早投入、整年滾」的效果）。</p>
+    </div>
+  </section>
+
+  <!-- 3. 結果 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>二十年後的樣子</h2><div class="rule"></div></div>
+    <div class="summary">
+      <div class="stat cost">
+        <div class="k">累積投入本金</div>
+        <div class="v" id="sumCost">—</div>
+        <div class="sub" id="sumCostSub">你實際付出的錢</div>
+      </div>
+      <div class="stat value">
+        <div class="k" id="sumValueK">第 20 年預估市值</div>
+        <div class="v" id="sumValue">—</div>
+        <div class="sub">本金 + 複利成長</div>
+      </div>
+      <div class="stat gain">
+        <div class="k">預估總獲利</div>
+        <div class="v" id="sumGain">—</div>
+        <div class="sub" id="sumGainSub">市值減去本金</div>
+      </div>
+    </div>
+
+    <div class="chartcard">
+      <div class="chart-legend">
+        <span class="lg"><span class="sw" style="background:var(--green)"></span>預估總市值</span>
+        <span class="lg"><span class="sw" style="background:var(--gold)"></span>累積投入本金</span>
+        <span class="lg" style="margin-left:auto;color:var(--ink-soft)">滑鼠移到曲線上看每年數字</span>
+      </div>
+      <svg class="chart" id="chart" viewBox="0 0 920 380" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+
+    <div class="bd">
+      <table class="bd-tbl">
+        <thead>
+          <tr>
+            <th>標的</th>
+            <th>累積本金</th>
+            <th>預估市值</th>
+            <th>預估獲利</th>
+            <th>佔總市值</th>
+          </tr>
+        </thead>
+        <tbody id="bdBody"></tbody>
+      </table>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="saveBtn">儲存我的設定</button>
+      <button class="btn ghost" id="resetBtn">回到範例數字</button>
+      <span class="saved" id="savedMsg">已儲存 ✓</span>
+    </div>
+  </section>
+
+  <!-- 說明備忘 -->
+  <div class="memo">
+    <h3>進場時機備忘</h3>
+    <div class="mtag">單 筆 投 入 ・ 月 份 策 略</div>
+    <ul>
+      <li><span class="mk">單筆 vs 每月</span><div>同樣的總金額，<b>越早投入、複利滾越久</b>。一年一次的單筆（年初投）期望報酬略高於分 12 次月扣；月扣換到的是分散買價、心理踏實。兩者沒有對錯。</div></li>
+      <li><span class="mk">最弱月份</span><div>歷史平均（非保證）：<b>美股九月最弱</b>，是全年唯一平均負報酬的月份；<b>台股五月最弱</b>，11 月到隔年 3 月最強。</div></li>
+      <li><span class="mk">配對買點</span><div><b>00646 配九月、0050 配五月</b> —— 各自買在自己市場歷史上最弱、平均較便宜的月份。實際低點多落在月底跌完後，<b>九月／五月下旬再出手</b>即可，不必卡月初第一天。</div></li>
+      <li><span class="mk">別讓現金空等</span><div>為了等「最佳月份」而讓獎金閒置好幾個月，<b>放棄的複利常常比省到的折扣還多</b>。例：72,000 空等 4 個月（8%）約少賺 1,900 元，等 9 個月約少賺 6,200 元，往往蓋過弱月的折扣。</div></li>
+      <li><span class="mk">建議節奏</span><div><b>一月獎金 → 一月就投</b>（本來就在最強的旺季）；<b>八月獎金 → 等到九月投 00646</b>（等待短、買在美股最弱月，接著進入旺季），CP 值最高。</div></li>
+    </ul>
+    <div class="mfoot">核心提醒：月份方向對就好，真正決定 20 年成果的是「持續投入不中斷、下跌時忍住不賣」，不是某一筆有沒有抓到最低點。季節性優勢小且不保證，僅供參考。</div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disc">
+    <b>幾個務必記得的前提：</b>過去績效不代表未來，這份試算是「假設報酬率固定」的理想模型，真實市場每年漲跌不一，中間一定會遇到帳面虧損的時候 —— 能不能領到這個複利結果，關鍵在「定期定額不中斷」與「不被嚇到提前賣出」。另外，<b>009816 掛牌時間很短</b>，回測報酬不等於未來實績，建議它的年化假設不要設得比 0050 高太多。本規劃書僅為個人試算工具，不構成投資建議。
+  </div>
+
+  <footer>投資規劃書 · 00646 / 0050 / 009816 · 資料可隨時於本檔案內修改重算</footer>
+</div>
+
+<script>
+"use strict";
+
+// ---- 安全的 localStorage 包裝（在不支援的環境下不會壞掉） ----
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+
+const DEFAULTS = [
+  {code:"00646", name:"元大標普500",  color:"#3a6ea5", current:100000, monthly:6000, annual:72000, rate:8},
+  {code:"0050",  name:"元大台灣50",   color:"#2d5a40", current:150000, monthly:6000, annual:72000, rate:8},
+  {code:"009816",name:"凱基台灣TOP50",color:"#b0894c", current:50000,  monthly:6000, annual:72000, rate:8}
+];
+
+let state = loadState();
+let years = state.years || 20;
+let mode = state.mode || "monthly";
+
+function loadState(){
+  const raw = store.get("plan_00646_0050_009816");
+  if(raw){
+    try{
+      const p = JSON.parse(raw);
+      if(p && p.etfs){
+        p.etfs.forEach(e=>{ if(e.annual===undefined) e.annual = (e.monthly||0)*12; });
+        return p;
+      }
+    }catch(e){}
+  }
+  return { etfs: DEFAULTS.map(d=>({...d})), years:20, mode:"monthly" };
+}
+
+// ---- 金額格式 ----
+function ntd(n){ return "NT$ " + Math.round(n).toLocaleString("en-US"); }
+function wan(n){
+  const w = n/10000;
+  if(w>=10000) return (w/10000).toFixed(2)+" 億";
+  return w.toLocaleString("en-US",{maximumFractionDigits:1})+" 萬";
+}
+
+// ---- 複利核心：回傳逐年的本金與市值 ----
+function projectSeries(current, amount, ratePct, yrs, m){
+  const r = ratePct/100;
+  const out=[];
+  for(let t=0;t<=yrs;t++){
+    const lump = current*Math.pow(1+r,t);
+    let cFV, cCost;
+    if(m==="annual"){
+      // 每年年初投入一筆（期初年金）
+      cCost = amount*t;
+      cFV = (r===0) ? amount*t : amount*((Math.pow(1+r,t)-1)/r)*(1+r);
+    }else{
+      // 每月底投入（期末月年金）
+      const mr = r===0 ? 0 : Math.pow(1+r,1/12)-1;
+      const months=t*12;
+      cCost = amount*months;
+      cFV = (mr===0) ? amount*months : amount*((Math.pow(1+mr,months)-1)/mr);
+    }
+    out.push({ year:t, cost: current+cCost, value: lump+cFV });
+  }
+  return out;
+}
+
+// ---- 建立輸入列 ----
+function buildInputs(){
+  const amtField = mode==="annual" ? "annual" : "monthly";
+  const step = mode==="annual" ? 5000 : 500;
+  document.getElementById("amtHead").textContent = mode==="annual" ? "每年單筆投入" : "每月投入";
+  const tb=document.getElementById("inputBody");
+  tb.innerHTML="";
+  state.etfs.forEach((e,i)=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>
+        <div class="etf-cell">
+          <span class="dot" style="background:${e.color}"></span>
+          <div><div class="c">${e.code}</div><div class="n">${e.name}</div></div>
+        </div>
+      </td>
+      <td><input type="number" min="0" step="1000" value="${e.current}" data-i="${i}" data-f="current"><span class="unit">元</span></td>
+      <td><input type="number" min="0" step="${step}" value="${e[amtField]}" data-i="${i}" data-f="${amtField}"><span class="unit">元</span></td>
+      <td><input type="number" class="pct" min="0" max="30" step="0.5" value="${e.rate}" data-i="${i}" data-f="rate"><span class="unit">%</span></td>`;
+    tb.appendChild(tr);
+  });
+  tb.querySelectorAll("input").forEach(inp=>{
+    inp.addEventListener("input",ev=>{
+      const i=+ev.target.dataset.i, f=ev.target.dataset.f;
+      state.etfs[i][f] = parseFloat(ev.target.value)||0;
+      syncPresetHighlight();
+      render();
+    });
+  });
+}
+
+function syncPresetHighlight(){
+  const rates=state.etfs.map(e=>e.rate);
+  const same = rates.every(r=>r===rates[0]) ? rates[0] : null;
+  document.querySelectorAll(".preset").forEach(b=>{
+    b.classList.toggle("active", same!==null && +b.dataset.rate===same);
+  });
+}
+
+// ---- 主渲染 ----
+function render(){
+  // 逐年序列
+  const series = state.etfs.map(e=>projectSeries(e.current, mode==="annual"?e.annual:e.monthly, e.rate, years, mode));
+  const totalByYear=[];
+  for(let t=0;t<=years;t++){
+    let c=0,v=0;
+    series.forEach(s=>{ c+=s[t].cost; v+=s[t].value; });
+    totalByYear.push({year:t,cost:c,value:v});
+  }
+  const last=totalByYear[years];
+  const gain=last.value-last.cost;
+
+  // summary
+  document.getElementById("sumCost").textContent=ntd(last.cost);
+  document.getElementById("sumCostSub").textContent="約 "+wan(last.cost);
+  document.getElementById("sumValueK").textContent="第 "+years+" 年預估市值";
+  document.getElementById("sumValue").textContent=ntd(last.value);
+  document.getElementById("sumGain").textContent=ntd(gain);
+  const mult = last.cost>0 ? (last.value/last.cost) : 0;
+  document.getElementById("sumGainSub").textContent="約 "+wan(gain)+"（本金翻 "+mult.toFixed(2)+" 倍）";
+
+  // breakdown
+  const bd=document.getElementById("bdBody");
+  bd.innerHTML="";
+  state.etfs.forEach((e,i)=>{
+    const s=series[i][years];
+    const g=s.value-s.cost;
+    const share=last.value>0 ? (s.value/last.value*100) : 0;
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td><div class="etf-cell"><span class="dot" style="background:${e.color}"></span>
+        <div><div class="c">${e.code}</div><div class="n">${e.rate}% / ${mode==="annual" ? "年投 "+(e.annual).toLocaleString() : "月投 "+(e.monthly).toLocaleString()}</div></div></div></td>
+      <td class="num">${ntd(s.cost)}</td>
+      <td class="num">${ntd(s.value)}</td>
+      <td class="num pos">＋${ntd(g)}</td>
+      <td class="num">${share.toFixed(0)}%</td>`;
+    bd.appendChild(tr);
+  });
+  const tr=document.createElement("tr");
+  tr.className="total";
+  tr.innerHTML=`<td>合計</td><td class="num">${ntd(last.cost)}</td><td class="num">${ntd(last.value)}</td>
+    <td class="num">＋${ntd(gain)}</td><td class="num">100%</td>`;
+  bd.appendChild(tr);
+
+  drawChart(totalByYear);
+}
+
+// ---- SVG 圖表 ----
+function drawChart(data){
+  const svg=document.getElementById("chart");
+  const W=920,H=380,padL=64,padR=20,padT=20,padB=44;
+  const maxV=Math.max(...data.map(d=>d.value),1);
+  const niceMax=Math.ceil(maxV/ (maxV>1e7?5e6:1e6)) * (maxV>1e7?5e6:1e6);
+  const x=t=> padL + (W-padL-padR) * (t/years);
+  const y=v=> H-padB - (H-padT-padB) * (v/niceMax);
+
+  let g="";
+  // grid + y labels
+  const steps=5;
+  for(let i=0;i<=steps;i++){
+    const val=niceMax*i/steps;
+    const yy=y(val);
+    g+=`<line class="gridline" x1="${padL}" y1="${yy}" x2="${W-padR}" y2="${yy}"/>`;
+    g+=`<text class="axislbl" x="${padL-10}" y="${yy+4}" text-anchor="end">${wan(val)}</text>`;
+  }
+  // x labels
+  const xticks = years<=10?years:(years<=20?Math.round(years/4)*0+(years/5):Math.round(years/5));
+  const stepX = years<=12?2:5;
+  for(let t=0;t<=years;t+=stepX){
+    g+=`<text class="axislbl" x="${x(t)}" y="${H-padB+22}" text-anchor="middle">${t}年</text>`;
+  }
+  if(years%stepX!==0){
+    g+=`<text class="axislbl" x="${x(years)}" y="${H-padB+22}" text-anchor="middle">${years}年</text>`;
+  }
+
+  const linePath=(key,)=> data.map((d,i)=> (i===0?"M":"L")+x(d.year)+" "+y(d[key])).join(" ");
+  const areaPath = data.map((d,i)=>(i===0?"M":"L")+x(d.year)+" "+y(d.value)).join(" ")
+                 + ` L ${x(years)} ${y(0)} L ${x(0)} ${y(0)} Z`;
+
+  g+=`<defs><linearGradient id="vgrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(45,90,64,.28)"/>
+        <stop offset="100%" stop-color="rgba(45,90,64,0)"/></linearGradient></defs>`;
+  g+=`<path d="${areaPath}" fill="url(#vgrad)"/>`;
+  g+=`<path d="${linePath('value')}" fill="none" stroke="var(--green)" stroke-width="2.6" stroke-linejoin="round"/>`;
+  g+=`<path d="${linePath('cost')}" fill="none" stroke="var(--gold)" stroke-width="2.2" stroke-dasharray="6 5" stroke-linejoin="round"/>`;
+
+  // hover layer
+  g+=`<g id="hoverG" style="opacity:0">
+        <line id="hvLine" y1="${padT}" y2="${H-padB}" stroke="var(--green-deep)" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle id="hvDotV" r="5" fill="var(--green)" stroke="#fff" stroke-width="1.5"/>
+        <circle id="hvDotC" r="4.5" fill="var(--gold)" stroke="#fff" stroke-width="1.5"/>
+        <g id="hvBox"><rect id="hvRect" rx="7" fill="var(--green-deep)" /><text id="hvT1" fill="#fdf8ee" font-size="12" font-weight="700"></text><text id="hvT2" fill="#dcd0b8" font-size="11"></text><text id="hvT3" fill="#cdb487" font-size="11"></text></g>
+      </g>`;
+  g+=`<rect id="hitArea" x="${padL}" y="${padT}" width="${W-padL-padR}" height="${H-padT-padB}" fill="transparent"/>`;
+
+  svg.innerHTML=g;
+
+  // hover interaction
+  const hit=svg.querySelector("#hitArea");
+  const hg=svg.querySelector("#hoverG");
+  const pt=svg.createSVGPoint();
+  function move(ev){
+    const cx = ev.touches?ev.touches[0].clientX:ev.clientX;
+    pt.x=cx; pt.y=0;
+    const sp=pt.matrixTransform(svg.getScreenCTM().inverse());
+    let t=Math.round((sp.x-padL)/((W-padL-padR)/years));
+    t=Math.max(0,Math.min(years,t));
+    const d=data[t];
+    hg.style.opacity=1;
+    svg.querySelector("#hvLine").setAttribute("x1",x(t));
+    svg.querySelector("#hvLine").setAttribute("x2",x(t));
+    svg.querySelector("#hvDotV").setAttribute("cx",x(t));
+    svg.querySelector("#hvDotV").setAttribute("cy",y(d.value));
+    svg.querySelector("#hvDotC").setAttribute("cx",x(t));
+    svg.querySelector("#hvDotC").setAttribute("cy",y(d.cost));
+    const t1=svg.querySelector("#hvT1"), t2=svg.querySelector("#hvT2"), t3=svg.querySelector("#hvT3");
+    t1.textContent="第 "+t+" 年";
+    t2.textContent="市值 "+ntd(d.value);
+    t3.textContent="本金 "+ntd(d.cost);
+    let bx=x(t)+12; const bw=148;
+    if(bx+bw>W-padR) bx=x(t)-bw-12;
+    const by=y(d.value)-58<padT?padT:y(d.value)-58;
+    svg.querySelector("#hvRect").setAttribute("x",bx);
+    svg.querySelector("#hvRect").setAttribute("y",by);
+    svg.querySelector("#hvRect").setAttribute("width",bw);
+    svg.querySelector("#hvRect").setAttribute("height",52);
+    t1.setAttribute("x",bx+12); t1.setAttribute("y",by+18);
+    t2.setAttribute("x",bx+12); t2.setAttribute("y",by+34);
+    t3.setAttribute("x",bx+12); t3.setAttribute("y",by+48);
+  }
+  hit.addEventListener("mousemove",move);
+  hit.addEventListener("touchmove",e=>{move(e);e.preventDefault();},{passive:false});
+  hit.addEventListener("mouseleave",()=>hg.style.opacity=0);
+}
+
+// ---- 事件 ----
+document.querySelectorAll(".mode").forEach(b=>{
+  b.addEventListener("click",()=>{
+    mode=b.dataset.mode;
+    document.querySelectorAll(".mode").forEach(x=>x.classList.toggle("active",x===b));
+    buildInputs(); render();
+  });
+});
+document.querySelectorAll(".preset").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const r=+b.dataset.rate;
+    state.etfs.forEach(e=>e.rate=r);
+    buildInputs(); syncPresetHighlight(); render();
+  });
+});
+document.getElementById("years").addEventListener("input",e=>{
+  years=+e.target.value;
+  document.getElementById("yearsVal").textContent=years;
+  render();
+});
+document.getElementById("saveBtn").addEventListener("click",()=>{
+  state.years=years; state.mode=mode;
+  store.set("plan_00646_0050_009816",JSON.stringify(state));
+  const m=document.getElementById("savedMsg"); m.classList.add("show");
+  setTimeout(()=>m.classList.remove("show"),1800);
+});
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  state={etfs:DEFAULTS.map(d=>({...d})),years:20,mode:"monthly"};
+  years=20; mode="monthly";
+  document.getElementById("years").value=20;
+  document.getElementById("yearsVal").textContent=20;
+  document.querySelectorAll(".mode").forEach(x=>x.classList.toggle("active",x.dataset.mode==="monthly"));
+  buildInputs(); syncPresetHighlight(); render();
+});
+
+// init
+document.querySelectorAll(".mode").forEach(x=>x.classList.toggle("active",x.dataset.mode===mode));
+document.getElementById("years").value=years;
+document.getElementById("yearsVal").textContent=years;
+buildInputs();
+syncPresetHighlight();
+render();
+</script>
+</body>
+</html>
