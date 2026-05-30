@@ -257,7 +257,7 @@
   <!-- 2. 輸入 -->
   <section>
     <div class="sec-head"><span class="sec-num">02</span><h2>填入你的數字</h2><div class="rule"></div></div>
-    <p class="lead">下面是<strong>範例數字</strong>，請改成你的實際金額。先選「投入方式」：每月定額扣款，或每年領獎金時單筆投入。</p>
+    <p class="lead">以下已<strong>預設為你的數字</strong>，可隨時修改重算。投入方式可選每月定額扣款，或每年領獎金時單筆投入。</p>
     <div class="panel" style="margin-top:14px">
       <div class="presets" style="border-bottom:1px solid var(--line);padding-bottom:14px">
         <span class="lbl">投入方式：</span>
@@ -325,23 +325,27 @@
     </div>
 
     <div class="bd">
-      <table class="bd-tbl">
+      <div class="tablewrap">
+      <table class="bd-tbl" style="min-width:660px">
         <thead>
           <tr>
             <th>標的</th>
+            <th>期初本金</th>
+            <th id="bdAmtHead">每年投入</th>
+            <th>年化</th>
             <th>累積本金</th>
             <th>預估市值</th>
             <th>預估獲利</th>
-            <th>佔總市值</th>
           </tr>
         </thead>
         <tbody id="bdBody"></tbody>
       </table>
+      </div>
     </div>
 
     <div class="actions">
       <button class="btn" id="saveBtn">儲存我的設定</button>
-      <button class="btn ghost" id="resetBtn">回到範例數字</button>
+      <button class="btn ghost" id="resetBtn">回到預設值</button>
       <span class="saved" id="savedMsg">已儲存 ✓</span>
     </div>
   </section>
@@ -378,14 +382,14 @@ const store = {
 };
 
 const DEFAULTS = [
-  {code:"00646", name:"元大標普500",  color:"#3a6ea5", current:100000, monthly:6000, annual:72000, rate:8},
-  {code:"0050",  name:"元大台灣50",   color:"#2d5a40", current:150000, monthly:6000, annual:72000, rate:8},
-  {code:"009816",name:"凱基台灣TOP50",color:"#b0894c", current:50000,  monthly:6000, annual:72000, rate:8}
+  {code:"00646", name:"元大標普500",  color:"#3a6ea5", current:68227,  monthly:6000, annual:72000, rate:8},
+  {code:"0050",  name:"元大台灣50",   color:"#2d5a40", current:362143, monthly:6000, annual:72000, rate:9},
+  {code:"009816",name:"凱基台灣TOP50",color:"#b0894c", current:500000, monthly:3000, annual:36000, rate:7}
 ];
 
 let state = loadState();
 let years = state.years || 20;
-let mode = state.mode || "monthly";
+let mode = state.mode || "annual";
 
 function loadState(){
   const raw = store.get("plan_00646_0050_009816");
@@ -398,7 +402,7 @@ function loadState(){
       }
     }catch(e){}
   }
-  return { etfs: DEFAULTS.map(d=>({...d})), years:20, mode:"monthly" };
+  return { etfs: DEFAULTS.map(d=>({...d})), years:20, mode:"annual" };
 }
 
 // ---- 金額格式 ----
@@ -494,26 +498,32 @@ function render(){
   document.getElementById("sumGainSub").textContent="約 "+wan(gain)+"（本金翻 "+mult.toFixed(2)+" 倍）";
 
   // breakdown
+  document.getElementById("bdAmtHead").textContent = mode==="annual" ? "每年投入" : "每月投入";
   const bd=document.getElementById("bdBody");
   bd.innerHTML="";
+  let sumCur=0, sumAmt=0;
   state.etfs.forEach((e,i)=>{
     const s=series[i][years];
     const g=s.value-s.cost;
-    const share=last.value>0 ? (s.value/last.value*100) : 0;
+    const amt = mode==="annual" ? e.annual : e.monthly;
+    sumCur+=e.current; sumAmt+=amt;
     const tr=document.createElement("tr");
     tr.innerHTML=`
       <td><div class="etf-cell"><span class="dot" style="background:${e.color}"></span>
-        <div><div class="c">${e.code}</div><div class="n">${e.rate}% / ${mode==="annual" ? "年投 "+(e.annual).toLocaleString() : "月投 "+(e.monthly).toLocaleString()}</div></div></div></td>
+        <div><div class="c">${e.code}</div><div class="n">${e.name}</div></div></div></td>
+      <td class="num">${ntd(e.current)}</td>
+      <td class="num">${ntd(amt)}</td>
+      <td class="num">${e.rate}%</td>
       <td class="num">${ntd(s.cost)}</td>
       <td class="num">${ntd(s.value)}</td>
-      <td class="num pos">＋${ntd(g)}</td>
-      <td class="num">${share.toFixed(0)}%</td>`;
+      <td class="num pos">＋${ntd(g)}</td>`;
     bd.appendChild(tr);
   });
   const tr=document.createElement("tr");
   tr.className="total";
-  tr.innerHTML=`<td>合計</td><td class="num">${ntd(last.cost)}</td><td class="num">${ntd(last.value)}</td>
-    <td class="num">＋${ntd(gain)}</td><td class="num">100%</td>`;
+  tr.innerHTML=`<td>合計</td><td class="num">${ntd(sumCur)}</td><td class="num">${ntd(sumAmt)}</td>
+    <td class="num">—</td><td class="num">${ntd(last.cost)}</td><td class="num">${ntd(last.value)}</td>
+    <td class="num">＋${ntd(gain)}</td>`;
   bd.appendChild(tr);
 
   drawChart(totalByYear);
@@ -634,11 +644,11 @@ document.getElementById("saveBtn").addEventListener("click",()=>{
   setTimeout(()=>m.classList.remove("show"),1800);
 });
 document.getElementById("resetBtn").addEventListener("click",()=>{
-  state={etfs:DEFAULTS.map(d=>({...d})),years:20,mode:"monthly"};
-  years=20; mode="monthly";
+  state={etfs:DEFAULTS.map(d=>({...d})),years:20,mode:"annual"};
+  years=20; mode="annual";
   document.getElementById("years").value=20;
   document.getElementById("yearsVal").textContent=20;
-  document.querySelectorAll(".mode").forEach(x=>x.classList.toggle("active",x.dataset.mode==="monthly"));
+  document.querySelectorAll(".mode").forEach(x=>x.classList.toggle("active",x.dataset.mode==="annual"));
   buildInputs(); syncPresetHighlight(); render();
 });
 
